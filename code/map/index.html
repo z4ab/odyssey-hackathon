@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/assets/logo.png">
+    <title>E-Mission Brampton</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  </head>
+  <body>
+    <header>
+      <img src="/assets/logo.png" alt="Logo">
+      <p>E-Mission</p>
+  </header>
+    <div class="grid">
+      <div class="grid-item"> <a href="/index.html">Home</a> </div>
+      <div class="grid-item"> <a href="/about/index.html">About</a> </div>
+      <div class="grid-item"> <a href="/map/index.html">Map</a> </div>
+    </div>
+    <div id="map"></div>
+    <div id="panel" hidden="true">
+      <h1 id="locname">Location Name</h1>
+      <p>
+        Greenhouse gas emmissions: <span id="ghg"></span> KG<br> 
+        Electricity consumption: <span id="elec"></span> KWH<br>
+        Natural gas consumption: <span id="nat"></span> M3<br> 
+      </p>
+      <img id="placeimg" src="https://lh5.googleusercontent.com/p/AF1QipN18s6HXvah8Kt6jQEuZ5_Sg335d4_3tfauuaQ_=w408-h272-k-no" alt="">
+    </div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtanIYvOn-v3rGvxeOvEGwPjOnwcghyT0&callback=initMap&v=weekly&libraries=places"
+      defer
+    ></script>
+  </body>
+</html>
