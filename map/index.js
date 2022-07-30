@@ -1,5 +1,3 @@
-
-
 let map;
 let url = "https://services3.arcgis.com/rl7ACuZkiFsmDA2g/arcgis/rest/services/Environment/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
 
@@ -7,16 +5,26 @@ const req = new Request(url)
 let arr = [];
 let ghgsort = [];
 
+let inps = document.getElementsByName("select")
+let view = "ghg"; 
+
+document.addEventListener('change', (ev) => {
+  view = ev.target.id
+  main()
+})
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 43.7315, lng: -79.7624 },
-    zoom: 12,
+    zoom: 13,
+    mapTypeId: 'satellite'
   });
   for (let i = 0; i < arr.length; i++) {
     const e = arr[i];
     debug.log(e);
   }
 }
+function main() {
 window.initMap = initMap;
 fetch(req)
   .then((response) => {
@@ -29,29 +37,35 @@ fetch(req)
   .then((response) => {
     arr = response.features
     ghgsort = arr.slice()
-    ghgsort.sort((a,b) => (a.attributes.GHG_EMISSIONS_KG > b.attributes.GHG_EMISSIONS_KG) ? 1 : ((b.attributes.GHG_EMISSIONS_KG > a.attributes.GHG_EMISSIONS_KG) ? -1 : 0))
+    if (view == "ghg") {
+      ghgsort.sort((a,b) => (a.attributes.GHG_EMISSIONS_KG > b.attributes.GHG_EMISSIONS_KG) ? 1 : ((b.attributes.GHG_EMISSIONS_KG > a.attributes.GHG_EMISSIONS_KG) ? -1 : 0))
+    } else if (view == "elec") {
+      ghgsort.sort((a,b) => (a.attributes.ELECTRICITY_KWH > b.attributes.ELECTRICITY_KWH) ? 1 : ((b.attributes.ELECTRICITY_KWH > a.attributes.ELECTRICITY_KWH) ? -1 : 0))
+    } else if (view == "nat") {
+      ghgsort.sort((a,b) => (a.attributes.NATURAL_GAS_M3 > b.attributes.NATURAL_GAS_M3) ? 1 : ((b.attributes.NATURAL_GAS_M3 > a.attributes.NATURAL_GAS_M3) ? -1 : 0))
+    }
+    console.log(ghgsort)
     ghgsort.reverse()
     arr.forEach(e => {
       var polygon = new google.maps.Circle({
-        strokeColor: "#FF0000",
         strokeOpacity: 0.1,
         strokeWeight: 2,
-        fillColor: "#FF0000",
-        fillOpacity: 0.35,
+        fillOpacity: 0.15,
         map,
         center: { lat: e.geometry.y, lng: e.geometry.x },
-        radius: 50,
+        radius: 200,
       });
       let ghg = e.attributes.GHG_EMISSIONS_KG
       let ghgi = ghgsort.findIndex((el) => el.attributes.GHG_EMISSIONS_KG == ghg)
+      var filop = 0.1
       if (ghgi < 178) {
-        polygon.setOptions({fillColor: "#FF0000"}) 
+        polygon.setOptions({fillColor: "#FF0000", strokeColor: "#FF0000", fillOpacity: filop}) 
       } else if (ghgi < 178*2) {
-        polygon.setOptions({fillColor: "#FFA500"}) 
+        polygon.setOptions({fillColor: "#FFA500", strokeColor: "#FFA500", fillOpacity: filop}) 
       } else if (ghgi < 178*3) {
-        polygon.setOptions({fillColor: "#FFFF00"}) 
+        polygon.setOptions({fillColor: "#FFFF00", strokeColor: "#FFFF00", fillOpacity: filop}) 
       } else {
-        polygon.setOptions({fillColor: "#00FF00"}) 
+        polygon.setOptions({fillColor: "#00FF00", strokeColor: "#00FF00", fillOpacity: filop}) 
       }
       var infoWindow = new google.maps.InfoWindow();
       google.maps.event.addListener(polygon, 'mouseover', function (i) {
@@ -75,3 +89,5 @@ fetch(req)
   }).catch((error) => {
     console.error(error);
   });
+}
+main()

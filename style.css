@@ -12,7 +12,7 @@ header{
   width: 100vw;
   height: 200px;
   border-bottom: solid 1px black;
-  background-color: black;
+  background-image: url("https://www.brampton.ca/EN/City-Hall/News/PublishingImages/Banner.jpg");
   display: inline-block;
 }
 
@@ -61,20 +61,22 @@ header p{
 }
 
 .grid-item {
-  background-color: white;
-  border: 2px solid black;
+  background-color: black;
+  border: 2px solid white;
   font-size: 20px;
   text-align: center;
   padding-top: 5px;
 }
 
 .grid-item-2 {
-  border: 3px dashed grey;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
   height: 350px;
 }
 
 a {
-  color: black;
+  color: white;
   text-decoration: none; 
 }
 
@@ -82,33 +84,8 @@ a:hover {
   text-decoration: underline;
 }
 
-#panel {
-  background-color: gray;
-  position:absolute;
-  top: 250px;
-  right: 10px;
-  height: 100%;
-  width: 25%;
-}
-
 img {
   pointer-events: none,
-}
-
-div.gallery {
-  margin: 5px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 180px;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-}
-
-div.gallery img {
-  width: 100%;
-  height: auto;
 }
 
 .desc {
@@ -126,15 +103,43 @@ div.gallery img {
   padding-top: 50px;
   padding-left: 15%;
   padding-bottom: 50px;
+  background-image: url("https://www.azocleantech.com/images/news/ImageForNews_29061_16159134791065461.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 fieldset {
   width: 80%;
   text-align: center;
-  border-style: bold;
-  border-width: 10px;
+  border-style: dashed;
+  border-width: 5px;
+  border-color: black;
   padding-top: 5px;
   padding-left: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
+}
+
+#selection{
+  background-color: white;
+  position: absolute;
+  border-radius: 15px;
+  bottom: -200px;
+  display: inline-block;
+  left: 10px;
+  padding-left: 8px;
+  padding-top: 3px;
+  padding-right: 3px;
+}
+
+#panel {
+  background-color: white;
+  position:absolute;
+  top: 250px;
+  right: 10px;
+  height: 100%;
+  width: 25%;
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-right: 3px;
 }
