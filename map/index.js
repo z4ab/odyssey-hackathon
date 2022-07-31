@@ -7,9 +7,13 @@ let ghgsort = [];
 
 let inps = document.getElementsByName("select")
 let view = "ghg"; 
+let polys = [];
 
 document.addEventListener('change', (ev) => {
   view = ev.target.id
+  polys.forEach(el => {
+    el.setMap(null)
+  });
   main()
 })
 
@@ -55,6 +59,8 @@ fetch(req)
         center: { lat: e.geometry.y, lng: e.geometry.x },
         radius: 200,
       });
+      polys.push(polygon)
+
       let ghg = e.attributes.GHG_EMISSIONS_KG
       let ghgi = ghgsort.findIndex((el) => el.attributes.GHG_EMISSIONS_KG == ghg)
       var filop = 0.1
@@ -84,6 +90,8 @@ fetch(req)
         document.getElementById("elec").innerText = e.attributes.ELECTRICITY_KWH 
         document.getElementById("ghg").innerText = e.attributes.GHG_EMISSIONS_KG
         document.getElementById("nat").innerText = e.attributes.NATURAL_GAS_M3
+        var ps = new google.maps.places.PlacesService(map)
+        ps.findPlaceFromQuery(req)
       });
     });
   }).catch((error) => {

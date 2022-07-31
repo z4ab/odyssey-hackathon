@@ -106,14 +106,15 @@ img {
   background-image: url("https://www.azocleantech.com/images/news/ImageForNews_29061_16159134791065461.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  color: white;
 }
 
 fieldset {
   width: 80%;
   text-align: center;
-  border-style: dashed;
-  border-width: 5px;
-  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+  border-color: white;
   padding-top: 5px;
   padding-left: 5px;
   padding-bottom: 5px;
@@ -137,9 +138,11 @@ fieldset {
   position:absolute;
   top: 250px;
   right: 10px;
-  height: 100%;
-  width: 25%;
+  height: 25%;
+  width: 22%;
   padding-left: 3px;
   padding-top: 3px;
   padding-right: 3px;
+  text-align: center;
+  border-radius: 10px;
 }
