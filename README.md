@@ -12,4 +12,3 @@ The actual site is currently not being hosted.
 - Anirudh Mahesh
 - Owen Zhang
 - Zaid Abdulameer
-- Ildaphonse Cornolius 
